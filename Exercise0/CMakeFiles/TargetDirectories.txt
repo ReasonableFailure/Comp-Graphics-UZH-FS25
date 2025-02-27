@@ -1,0 +1,3 @@
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/CMakeFiles/glexample.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/CMakeFiles/edit_cache.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/CMakeFiles/rebuild_cache.dir

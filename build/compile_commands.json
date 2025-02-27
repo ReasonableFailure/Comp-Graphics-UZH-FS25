@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/build",
+  "command": "/usr/bin/c++ -DGLEW_STATIC -DSHADER_DIR=\\\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src\\\" -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/glexample.dir/src/GLApp.cpp.o -c /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/GLApp.cpp",
+  "file": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/GLApp.cpp",
+  "output": "CMakeFiles/glexample.dir/src/GLApp.cpp.o"
+},
+{
+  "directory": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/build",
+  "command": "/usr/bin/c++ -DGLEW_STATIC -DSHADER_DIR=\\\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src\\\" -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/glexample.dir/src/GLExample.cpp.o -c /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/GLExample.cpp",
+  "file": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/GLExample.cpp",
+  "output": "CMakeFiles/glexample.dir/src/GLExample.cpp.o"
+},
+{
+  "directory": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/build",
+  "command": "/usr/bin/c++ -DGLEW_STATIC -DSHADER_DIR=\\\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src\\\" -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/glexample.dir/src/Model.cpp.o -c /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/Model.cpp",
+  "file": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/Model.cpp",
+  "output": "CMakeFiles/glexample.dir/src/Model.cpp.o"
+},
+{
+  "directory": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/build",
+  "command": "/usr/bin/c++ -DGLEW_STATIC -DSHADER_DIR=\\\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src\\\" -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/glexample.dir/src/main.cpp.o -c /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/main.cpp",
+  "file": "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise0/src/main.cpp",
+  "output": "CMakeFiles/glexample.dir/src/main.cpp.o"
+}
+]
