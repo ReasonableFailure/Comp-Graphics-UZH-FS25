@@ -92,7 +92,7 @@ namespace cgCourse
 		glDisable(GL_CULL_FACE);
 
 		// Clear the color and depth buffers
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.19f, 0.94f, 0.69f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Load program
