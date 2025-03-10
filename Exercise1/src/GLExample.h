@@ -31,6 +31,7 @@ namespace cgCourse
 
         // **TODO**: You could add a boolean or variable to toggle wireframe vs. fill
         bool wireframeMode = false;
+        bool faceCulling = false;
     };
 }
 

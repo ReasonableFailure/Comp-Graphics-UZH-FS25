@@ -26,6 +26,7 @@ namespace cgCourse
     private:
         // Generate positions, normals, color, and faces
         void generateMesh();   
+        int indexOfVertex(int i, int j);
         
         // Shift vertices along their normals by 'offset'
         void applyOffset();

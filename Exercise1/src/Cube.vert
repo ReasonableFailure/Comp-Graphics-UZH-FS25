@@ -1,5 +1,8 @@
 #version 410 core
 
+layout(std140) uniform settingsBlock{
+	bool frame;
+} renderSettings;
 // Input vertex data
 layout(location = 0) in vec3 vPosition;
 layout(location = 1) in vec3 vColor;
@@ -10,6 +13,7 @@ out vec3 fragColor;
 
 // Values that stay constant for the whole mesh.
 uniform mat4 mvpMatrix;
+uniform vec3 framecolor
 
 void main()
 {
@@ -17,6 +21,10 @@ void main()
 	gl_Position = mvpMatrix * vec4(vPosition, 1);
 	// The color of each vertex will be interpolated
 	// to produce the color of each fragment
-	fragColor = vColor;
+	if(renderSettings.frame){
+		fragColor = framecolor;
+	} else {
+		fragColor = vColor;
+	}
 }
 

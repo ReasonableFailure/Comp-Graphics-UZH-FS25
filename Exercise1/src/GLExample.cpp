@@ -39,13 +39,17 @@ namespace cgCourse
         mvpUniformLocation = glGetUniformLocation(program, "mvpMatrix");
 
         // **TODO**: Create your torus object with some warp
-        // For example: R=5.0f, r=1.0f, numSegments=32, numTubeSegments=16, offset=0.5, twistFactor=0.2)
+        // // For example: R=5.0f, r=1.0f, numSegments=32, numTubeSegments=16, offset=0.5, twistFactor=0.2)
+        torus = std::make_shared<Torus>(5.0f,1.0f,32,16,0.0f,0.0f); //Wireframe yes/no
+        //  torus = new cgCourse::Torus(5.0f,1.0f,32,16,0.5f,0.0f); //wireframe yes
+        //  torus = new cgCourse::Torus(5.0f,1.0f,32,16,0.5f,0.2f); //Wireframe yes
 
 
         // (Optional) position the torus
-        // torus->setShapePosition(glm::vec3(0.0f, 0.0f, 0.0f));
+        torus->setShapePosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
-        return true;
+
+        return torus->createVertexArray(0,1,2);
     }
 
     bool GLExample::render()
@@ -61,6 +65,17 @@ namespace cgCourse
 
         // **TODO**: Switch between wireframe & fill
 
+        if (wireframeMode)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        if (faceCulling)
+            glEnable(GL_CULL_FACE);
+        else
+            glDisable(GL_CULL_FACE);
+
+
 
         // Use our shader program
         glUseProgram(program);
@@ -72,6 +87,7 @@ namespace cgCourse
 
 
         // **TODO**: Draw the torus
+        torus->draw();
 
         return true;
     }
