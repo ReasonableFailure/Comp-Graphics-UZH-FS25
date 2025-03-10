@@ -25,37 +25,7 @@ namespace cgCourse
         positions.clear();
         normals.clear();
         colors.clear();
-        faces.clear();
-        const float PHI = 2* M_PI;
-        const float THETA = 2*M_PI;
-        for(int i = 0; i < this->numSegments; ++i){
-            for(int j = 0; j <this->numTubeSegments,++j){
-                float phi = i * PHI/numSegments;
-                float theta =  j * THETA/numTubeSegments;
-                float x = this-> R * cos(phi) + this->r * cos(phi) * cos(theta);
-                float y = this-> R * sin(phi) + this->r * sin(phi) * cos(theta);
-                float z = this->r * sin(theta);
-                glm::vec3 point = glm::vec3(x,y,z);
-                glm::vec3 point_color = glm::vec3(abs(cos(thetaWarp)), abs(sin(phi)), 0.5f);
-                positions.push_back(point);
-                colors.push_back(point_color)
-            }
-        }
-        for(int i = 0; i < this->numSegments; ++i){
-            for(int j = 0; j < this->numTubeSegments; ++j){
-                int iplus1 = 0;
-                int jplus1 = 0;
-                if(this->numSegments-1 > i){
-                    iplus1 = i+1;
-                }
-                if(this->numTubeSegments-1 > j){
-                    jplus1 = j+1;
-                }
-                glm::uvec3 tri1 = glm::uvec3()
-                faces.push_back
-            }
-        }
-        
+        faces.clear();        
         // **TODO**: Implement parametric torus with a warp
         // Use angles: theta in [0..2π), phi in [0..2π).
         // Example of warping:
@@ -70,13 +40,50 @@ namespace cgCourse
 
         // Also store normals and a color. Example color:
         // glm::vec3 color = glm::vec3(abs(cos(thetaWarp)), abs(sin(phi)), 0.5f);
-        
+        const float PHI = 2* M_PI;
+        const float THETA = 2*M_PI;
+        for(int i = 0; i < this->numSegments; ++i){
+            for(int j = 0; j <this->numTubeSegments,++j){
+                float phi = i * PHI/numSegments;
+                float theta =  j * THETA/numTubeSegments;
+                float thetaWarp = theta + twistFactor * sin(phi);
+                float x = this-> R * cos(phi) + this->r * cos(phi) * cos(thetaWarp);
+                float y = this-> R * sin(phi) + this->r * sin(phi) * cos(thetaWarp);
+                float z = this->r * sin(thetaWarp);
+                glm::vec3 point = glm::vec3(x,y,z);
+                glm::vec3 point_color = glm::vec3(abs(cos(thetaWarp)), abs(sin(phi)), 0.5f);
+                positions.push_back(point);
+                colors.push_back(point_color)
+            }
+        }
         // **TODO**: Build triangle faces
         // Each cell has two triangles:
         //   (i, j), (i+1, j), (i, j+1)
         //   (i, j+1), (i+1, j), (i+1, j+1)
+        for(int i = 0; i < this->numSegments; ++i){
+            for(int j = 0; j < this->numTubeSegments; ++j){
+                int iplus1 = 0;
+                int jplus1 = 0;
+                if(this->numSegments-1 > i){
+                    iplus1 = i+1;
+                }
+                if(this->numTubeSegments-1 > j){
+                    jplus1 = j+1;
+                }
+                glm::uvec3 tri1 = glm::uvec3(indexOfVertex(i,j), indexOfVertex(iplus1,j),indexOfVertex(i,jplus1));
+                glm::uvec3 tri2 =glm::uvec3(indexOfVertex(i,jplus1), indexOfVertex(iplus1,j), indexOfVertex(iplus1,jplus1));
+                faces.push_back(tri1);
+                faces.push_back(tri2);
+            }
+        }
+        
+
+        
+        
     }
-    int Torus::indexOfVertex()
+    int Torus::indexOfVertex(int i, int j){
+        return i * this->numTubeSegments + j;
+    }
 
     void Torus::applyOffset()
     {
