@@ -65,18 +65,18 @@ namespace cgCourse
 
 		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE, _resizeable ? GLFW_TRUE : GLFW_FALSE);
-
+		// std::cout << "help3";
 		// Window and OpenGL context creation
 		window_ = glfwCreateWindow(int(_windowSize.x), int(_windowSize.y), title.c_str(), NULL, NULL);
 		assert(window_);
-
+		// std::cout << "help4";
 		glfwSetWindowPos(window_, 64, 64);
 		glfwSetWindowUserPointer(window_, this);
 		glfwSetInputMode(window_, GLFW_STICKY_KEYS, 1);
 		glfwSetKeyCallback(window_, EventDispatcher::keyCallback);
 		glfwSetMouseButtonCallback(window_, EventDispatcher::mouseButtonCallback);
 		glfwSetCursorPosCallback(window_, EventDispatcher::cursorPosCallback);
-
+		// std::cout << "help5";
 		// Load OpenGL core profile functions using gl3w
 		glfwMakeContextCurrent(window_);
 
@@ -98,6 +98,7 @@ namespace cgCourse
 
 	bool GLApp::run()
 	{
+		std::cout << "help";
 		// Call custom application initialization
 		if(!init())
 			return false;
@@ -120,6 +121,12 @@ namespace cgCourse
 		if(_key == GLFW_KEY_ESCAPE && _action == GLFW_PRESS)
 		{
 			stop();
+		}
+		if(_key == GLFW_KEY_W && _action == GLFW_PRESS){
+			wireframeMode = !wireframeMode;
+		}
+		if(_key == GLFW_KEY_F && _action == GLFW_PRESS){
+			faceCulling = !faceCulling;
 		}
 	}
 

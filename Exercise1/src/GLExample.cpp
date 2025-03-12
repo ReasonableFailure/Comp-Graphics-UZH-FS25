@@ -11,6 +11,7 @@ namespace cgCourse
 
     bool GLExample::init()
     {
+        // std::cout << "help";
         // Set viewport
         glm::uvec2 fbSize = getFramebufferSize();
         glViewport(0, 0, int(fbSize.x), int(fbSize.y));
@@ -47,8 +48,7 @@ namespace cgCourse
 
         // (Optional) position the torus
         torus->setShapePosition(glm::vec3(0.0f, 0.0f, 0.0f));
-
-
+        
         return torus->createVertexArray(0,1,2);
     }
 

@@ -35,6 +35,9 @@ namespace cgCourse
 
 		GLFWwindow * window_ = nullptr;
 		std::string const title;
+		
+		bool wireframeMode = false;
+		bool faceCulling = false;
 	};
 }
 

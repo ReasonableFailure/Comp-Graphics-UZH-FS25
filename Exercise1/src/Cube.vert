@@ -13,7 +13,7 @@ out vec3 fragColor;
 
 // Values that stay constant for the whole mesh.
 uniform mat4 mvpMatrix;
-uniform vec3 framecolor
+uniform vec3 framecolor;
 
 void main()
 {

@@ -94,15 +94,15 @@ namespace cgCourse
          */
         std::vector<std::vector<unsigned int>> associate; //associate the 3 faces to particle i
         for(unsigned int i = 0; i < positions.size(); ++i){
-            std::vector<unsigned int> oneVertexAssoc{i};
-            for(unsigned int j = 0; j < faces.size() && oneVertexAssoc.size() < 5; ++j){
+            std::vector<unsigned int> oneVertexAssoc = {i};
+            for(unsigned int j = 0; j < faces.size() /*&& oneVertexAssoc.size() < 5*/; ++j){
                 if(faces[j][0] == i || faces[j][1] == i ||faces[j][2] == i ){ //inspect face[j]'s components, which are indices into positions
                     oneVertexAssoc.push_back(j); //save index of face which is associated
                 }
             }
-            if(oneVertexAssoc.size() == 4){
+            /*if(oneVertexAssoc.size() == 4){*/
                 associate.push_back(oneVertexAssoc);
-            }            
+            /*}            */
         }
         for(int i = 0; i < positions.size(); ++i){
             glm::vec3 vertexnormal=glm::vec3(0);
