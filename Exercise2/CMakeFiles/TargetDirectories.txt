@@ -1,0 +1,6 @@
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/CMakeFiles/exercise.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/CMakeFiles/edit_cache.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/CMakeFiles/rebuild_cache.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/imgui/CMakeFiles/imgui.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/imgui/CMakeFiles/edit_cache.dir
+/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/imgui/CMakeFiles/rebuild_cache.dir

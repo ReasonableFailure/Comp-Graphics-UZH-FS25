@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DGLEW_STATIC -DRES_DIR=\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/res\" -DSHADER_DIR=\"/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/shader\"
 
-CXX_INCLUDES = -I/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2/imgui/imgui -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include
+CXX_INCLUDES = -I/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise2 -isystem /home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/include
 
 CXX_FLAGS = -Wall -Wextra -Wno-unused-result
 
