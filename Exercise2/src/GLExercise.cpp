@@ -9,18 +9,20 @@ namespace cgCourse
 	GLExercise::GLExercise(const glm::uvec2 & windowSize, const std::string & title): GLApp(windowSize, title, false)
 	{
 		normalsTorus = MultiLine(torus.positions, torus.normals);
+		
 	}
-
+	
 	bool GLExercise::init()
 	{
 		// Framebuffer size and window size may be different in high-DPI displays
 		// setup camera with standard view (static for our case)
 		cam.create(	getFramebufferSize(),
-					glm::vec3(3, 3, -3),
-					glm::vec3(0, 0, 0),
-					glm::vec3(0, 1, 0)
-					);
-
+		glm::vec3(3, 3, -3),
+		glm::vec3(0, 0, 0),
+		glm::vec3(0, 1, 0)
+	);
+	
+		std::vector<std::unique_ptr<MultiLine>> normalsTori;
 		programForShape = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shape");
 		programForTorusNormals = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Normals");
 		programForUnitCube = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/UnitCube");
@@ -84,6 +86,7 @@ namespace cgCourse
 
 		mvpMatrix = cam.getViewProjectionMatrix() * cube.modelMatrix;
 		// normalMatrix = TODO: compute the normal matrix
+		normalMatrix = glm::mat3(glm::inverse(glm::transpose(cube.getModelMatrix())));
 		glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
 		glUniformMatrix3fv(programForShape->getUniformLocation("normalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
 		cube.draw();
@@ -108,6 +111,7 @@ namespace cgCourse
 		{
 			mvpMatrix = cam.getViewProjectionMatrix() * modelMat;
 			// normalMatrix = TODO: compute the normal matrix
+			normalMatrix = glm::mat3(glm::inverse(glm::transpose(modelMat)));
 			glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
 			glUniformMatrix3fv(programForShape->getUniformLocation("normalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
 			torus.draw();
@@ -119,6 +123,13 @@ namespace cgCourse
 		if(!drawTorusNormals) return;
 
 		// TODO: draw the torus normals using the multiline object
+		programForTorusNormals->bind();
+		mvpMatrix = cam.getViewProjectionMatrix()*normalsTorus.getModelMatrix();
+		glUniformMatrix4fv(programForTorusNormals->getUniformLocation("mvpMatrix"),1,GL_FALSE,&mvpMatrix[0][0]);
+		normalsTorus.draw();
+
+		programForTorusNormals->unbind();
+
 	}
 
 	bool GLExercise::end()

@@ -77,18 +77,27 @@ namespace cgCourse
 	// TODO: complete the following methods
 	void Shape::setPosition(const glm::vec3 & pos)
 	{
+		objectPosition = pos;
+		translationMatrix = glm::translate(glm::mat4(1.0),pos);
+		calculateModelMatrix();
 	}
 
 	void Shape::setRotation(float angle, const glm::vec3 & rot)
 	{
+		rotationMatrix = glm::rotate(glm::mat4(1.0),angle,rot);
+		calculateModelMatrix();
 	}
 
 	void Shape::setScaling(const glm::vec3 & scale)
 	{
+		scalingMatrix = glm::scale(glm::mat4(1.0),scale);
+		calculateModelMatrix();
 	}
 
 	void Shape::calculateModelMatrix()
 	{
+		modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+
 	}
 
 	void Shape::initIndexBuffer()

@@ -17,6 +17,7 @@ void main()
 	gl_Position = mvpMatrix * vec4(vPosition, 1);
 	
 	// TODO: complete, use the bool variables to enable/switch the options useNormalMatrix and normalsAsColor
-	objectColor = vColor;
+	vec3 normal = useNormalMatrix ? normalize(normalMatrix * vNormal) : vNormal;
+	objectColor = normalsAsColor ? normalize(normal +vec3(1)) : vColor;
 }
 

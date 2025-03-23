@@ -39,6 +39,7 @@ namespace cgCourse
 
 		Cube cube;
 		Torus torus;
+		// std::vector<std::unique_ptr<Torus>> Tori;
 		MultiLine normalsTorus;
 		UnitCube unitCube;
 
