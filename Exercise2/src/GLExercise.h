@@ -38,10 +38,12 @@ namespace cgCourse
 		std::shared_ptr<ShaderProgram> programForUnitCube;
 
 		Cube cube;
-		Torus torus;
-		// std::vector<std::unique_ptr<Torus>> Tori;
-		MultiLine normalsTorus;
 		UnitCube unitCube;
+		unsigned int no_tori,animationTicks, animationSteps;
+		float relativeAngle,scaleFactor;
+
+		std::vector<std::unique_ptr<Torus>> tori;
+		std::vector<std::unique_ptr<MultiLine>> normalsTori;
 
 		std::vector<glm::mat4> torusModelMats;
 
