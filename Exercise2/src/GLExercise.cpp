@@ -8,7 +8,7 @@ namespace cgCourse
 {
 	GLExercise::GLExercise(const glm::uvec2 & windowSize, const std::string & title): GLApp(windowSize, title, false)
 	{
-		normalsTorus = MultiLine(torus.positions, torus.normals);
+		// normalsTorus = MultiLine(torus.positions, torus.normals);
 		
 	}
 	
@@ -19,40 +19,71 @@ namespace cgCourse
 		cam.create(	getFramebufferSize(),
 		glm::vec3(3, 3, -3),
 		glm::vec3(0, 0, 0),
-		glm::vec3(0, 1, 0)
-	);
+		glm::vec3(0, 1, 0));
 	
-		std::vector<std::unique_ptr<MultiLine>> normalsTori;
+		
 		programForShape = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shape");
 		programForTorusNormals = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Normals");
 		programForUnitCube = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/UnitCube");
 
+		animationSteps = 60;
+
 		// Init models VAO
 		if(!cube.createVertexArray(0, 1, 2))
 			return false;
-
-		if(!torus.createVertexArray(0, 1, 2))
-			return false;
-
-		// TODO: setup some initial transformation for the cube and toruses, use the implemented methods from Shape.
-		// the initial state of the exercise only create one torus, you need to do modifications maybe in Shape.h to create the 4 torus.
-		torusModelMats.push_back(glm::mat4(1));
-
-		// Init multiline field for normals of objects
-		if(!normalsTorus.createVertexArray(0, 1, 2))
-			return false;
+		cube.setScaling(glm::vec3(scaleFactor,scaleFactor,scaleFactor));
 
 		if (!unitCube.createVertexArray(0, 1, 2)) 
 			return false;
+
+		for(unsigned i =0 ; i < no_tori; ++i){
+			auto torus = std::make_unique<Torus>();
+			if(!torus->createVertexArray(0,1,2)) return false;
+			
+			relativeAngle = 2*M_PI/no_tori;
+			torus->setPosition(glm::vec3(
+				cos(-relativeAngle*i)*scaleFactor*3.0,
+				0,
+				sin(-relativeAngle*i)*scaleFactor*3.0
+				)
+			);
+			auto normalsTorus = std::make_unique<MultiLine>(torus->positions,torus->normals);
+			if(!normalsTorus->createVertexArray(0,1,2)) return false;
+			tori.push_back(std::move(torus));
+			normalsTori.push_back(std::move(normalsTorus));			
+		}
 
 		return true;
 	}
 
 	bool GLExercise::update()
 	{
-		if(!animation) return true;
-
 		// TODO: implement the animation of the cube and toruses
+		if(!animation) return true;
+		float minSize = 0.4;
+		float maxSize = 2.5;
+		float rotationAngle = animationTicks * 2 * M_PI/animationSteps;
+		float scaleStep = 1.0/animationSteps;
+		int growing = 1;
+		cube.setRotation(rotationAngle,glm::vec3(0,1,0));
+		if(maxSize <= scaleFactor+scaleStep){ //next step would be too large ->  decrease instead
+			growing = -1;
+		}else if(minSize >= scaleFactor-scaleStep){ //next step would be too small -> increase instead
+			growing = 1;
+		}
+		scaleFactor += growing*scaleStep;
+		cube.setScaling(glm::vec3(scaleFactor,scaleFactor,scaleFactor));
+		for(unsigned int i = 0; i < no_tori; ++i){
+			auto &torus = tori[i];
+			torus->setRotation(rotationAngle,glm::vec3(0,0,1));
+			torus->setPosition(glm::vec3(
+					scaleFactor*3*cos(-(relativeAngle*i+rotationAngle)),
+					0,
+					scaleFactor*3*sin(-(relativeAngle*i+rotationAngle))
+				)
+			);
+			torus->setScaling(glm::vec3(scaleFactor,scaleFactor,scaleFactor));
+		}
 
 		return true;
 	}
@@ -66,6 +97,7 @@ namespace cgCourse
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
+		++animationTicks;
 		update();
 
 		glProgramUniform1i(*programForTorusNormals, programForTorusNormals->getUniformLocation("useNormalMatrix"), useNormalMatrix);
@@ -107,14 +139,14 @@ namespace cgCourse
 	{
 		programForShape->bind();
 
-		for(auto & modelMat: torusModelMats)
+		for(auto & torus: tori)
 		{
-			mvpMatrix = cam.getViewProjectionMatrix() * modelMat;
+			mvpMatrix = cam.getViewProjectionMatrix() * torus->getModelMatrix();
 			// normalMatrix = TODO: compute the normal matrix
-			normalMatrix = glm::mat3(glm::inverse(glm::transpose(modelMat)));
+			normalMatrix = glm::mat3(glm::inverse(glm::transpose(torus->getModelMatrix())));
 			glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
 			glUniformMatrix3fv(programForShape->getUniformLocation("normalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
-			torus.draw();
+			torus->draw();
 		}
 
 		programForShape->unbind();
@@ -124,10 +156,14 @@ namespace cgCourse
 
 		// TODO: draw the torus normals using the multiline object
 		programForTorusNormals->bind();
-		mvpMatrix = cam.getViewProjectionMatrix()*normalsTorus.getModelMatrix();
-		glUniformMatrix4fv(programForTorusNormals->getUniformLocation("mvpMatrix"),1,GL_FALSE,&mvpMatrix[0][0]);
-		normalsTorus.draw();
-
+		for(unsigned int  i = 0; i < no_tori; ++i)
+		{	
+			auto & torus = tori[i];
+			auto & normalsTorus = normalsTori[i];
+			mvpMatrix = cam.getViewProjectionMatrix()*torus->getModelMatrix();
+			glUniformMatrix4fv(programForTorusNormals->getUniformLocation("mvpMatrix"),1,GL_FALSE,&mvpMatrix[0][0]);
+			normalsTorus->draw();
+		}
 		programForTorusNormals->unbind();
 
 	}
