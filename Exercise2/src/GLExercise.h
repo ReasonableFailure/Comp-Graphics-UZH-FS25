@@ -20,7 +20,7 @@ namespace cgCourse
 	class GLExercise : public GLApp
 	{
 	public:
-		GLExercise(const glm::uvec2 & windowSize, const std::string & title);
+		GLExercise(const glm::uvec2 & windowSize, const std::string & title, const unsigned int toruses);
 
 		bool init() override;
 		bool update() override;
@@ -40,6 +40,7 @@ namespace cgCourse
 		Cube cube;
 		UnitCube unitCube;
 		unsigned int no_tori,animationTicks, animationSteps;
+		int growing;
 		float relativeAngle,scaleFactor;
 
 		std::vector<std::unique_ptr<Torus>> tori;

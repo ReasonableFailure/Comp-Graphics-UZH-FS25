@@ -6,10 +6,10 @@
 
 namespace cgCourse
 {
-	GLExercise::GLExercise(const glm::uvec2 & windowSize, const std::string & title): GLApp(windowSize, title, false)
+	GLExercise::GLExercise(const glm::uvec2 & windowSize, const std::string & title, const unsigned int toruses): GLApp(windowSize, title, false)
 	{
 		// normalsTorus = MultiLine(torus.positions, torus.normals);
-		
+		no_tori = toruses;
 	}
 	
 	bool GLExercise::init()
@@ -26,7 +26,7 @@ namespace cgCourse
 		programForTorusNormals = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Normals");
 		programForUnitCube = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/UnitCube");
 
-		animationSteps = 60;
+		animationSteps = 300;
 
 		// Init models VAO
 		if(!cube.createVertexArray(0, 1, 2))
@@ -35,8 +35,8 @@ namespace cgCourse
 
 		if (!unitCube.createVertexArray(0, 1, 2)) 
 			return false;
-
-		for(unsigned i =0 ; i < no_tori; ++i){
+		// std::cout<<no_tori <<std::endl
+		for(unsigned i = 0 ; i < no_tori; ++i){
 			auto torus = std::make_unique<Torus>();
 			if(!torus->createVertexArray(0,1,2)) return false;
 			
@@ -47,6 +47,7 @@ namespace cgCourse
 				sin(-relativeAngle*i)*scaleFactor*3.0
 				)
 			);
+			torus->setScaling(glm::vec3(scaleFactor*0.3,scaleFactor*0.3,scaleFactor*0.3));
 			auto normalsTorus = std::make_unique<MultiLine>(torus->positions,torus->normals);
 			if(!normalsTorus->createVertexArray(0,1,2)) return false;
 			tori.push_back(std::move(torus));
@@ -61,28 +62,31 @@ namespace cgCourse
 		// TODO: implement the animation of the cube and toruses
 		if(!animation) return true;
 		float minSize = 0.4;
-		float maxSize = 2.5;
+		float maxSize = 2.0;
 		float rotationAngle = animationTicks * 2 * M_PI/animationSteps;
 		float scaleStep = 1.0/animationSteps;
-		int growing = 1;
+		
 		cube.setRotation(rotationAngle,glm::vec3(0,1,0));
 		if(maxSize <= scaleFactor+scaleStep){ //next step would be too large ->  decrease instead
 			growing = -1;
 		}else if(minSize >= scaleFactor-scaleStep){ //next step would be too small -> increase instead
 			growing = 1;
+		} else {
+			growing = growing;
 		}
+		// std::cout<<growing<<std::endl;
 		scaleFactor += growing*scaleStep;
 		cube.setScaling(glm::vec3(scaleFactor,scaleFactor,scaleFactor));
 		for(unsigned int i = 0; i < no_tori; ++i){
 			auto &torus = tori[i];
-			torus->setRotation(rotationAngle,glm::vec3(0,0,1));
+			torus->setRotation(rotationAngle*1.5,glm::vec3(0,0,1));
 			torus->setPosition(glm::vec3(
 					scaleFactor*3*cos(-(relativeAngle*i+rotationAngle)),
 					0,
 					scaleFactor*3*sin(-(relativeAngle*i+rotationAngle))
 				)
 			);
-			torus->setScaling(glm::vec3(scaleFactor,scaleFactor,scaleFactor));
+			torus->setScaling(glm::vec3(scaleFactor*0.3,scaleFactor*0.3,scaleFactor*0.3));
 		}
 
 		return true;

@@ -18,7 +18,8 @@ namespace cgCourse
 			normals.push_back(_normals[i]);
 			normals.push_back(_normals[i]);
 
-			
+			colors.push_back(glm::vec3(0.5,0.5,0.0));
+			colors.push_back(glm::vec3(0.5,0.5,0.0));
 		}
 	}
 
