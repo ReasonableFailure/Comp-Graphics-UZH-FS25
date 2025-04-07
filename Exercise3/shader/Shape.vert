@@ -5,6 +5,26 @@
  *      ...it emits the color in case you do gouraud shading
  */
 
+layout(std140) uniform settingsBlock{
+    bool wire;
+    bool lightingSwitch;
+    bool ambientSwitch;
+    bool diffuseSwitch;
+    bool specularSwitch;
+} settings;
+
+layout(std140) uniform materialBlock{
+    float ambient;
+    float diffuse;
+    float specular;
+    float shiny;
+} material;
+
+layout(std140) uniform lightBlock{
+    vec4 lightPosition;
+    vec4 lightColour;
+} light;
+
 // Input vertex data
 layout(location = 0) in vec3 vPosition;
 layout(location = 1) in vec3 vColor;

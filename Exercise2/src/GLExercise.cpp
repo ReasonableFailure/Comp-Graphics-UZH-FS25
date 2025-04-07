@@ -86,7 +86,7 @@ namespace cgCourse
 					scaleFactor*3*sin(-(relativeAngle*i+rotationAngle))
 				)
 			);
-			torus->setScaling(glm::vec3(scaleFactor*0.3,scaleFactor*0.3,scaleFactor*0.3));
+			torus->setScaling(glm::vec3(scaleFactor*0.7,scaleFactor*0.7,scaleFactor*0.7));
 		}
 
 		return true;
