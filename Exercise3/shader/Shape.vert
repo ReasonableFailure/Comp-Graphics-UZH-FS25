@@ -35,6 +35,7 @@ layout(location = 2) in vec3 vNormal;
 out vec3 objectColor;
 out vec3 normal;
 out vec3 worldPos;
+flat out vec4 flat_color;
 
 // matrices that stay constant for the whole mesh.
 uniform mat4 modelMatrix;
@@ -49,6 +50,10 @@ uniform bool gouraudShading;
 void main()
 {
     normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
+    vec3 nor = mat3(transpose(inverse(modelMatrix)))*normalize(vNormal);
+    vec3 lig = normalize(light.lightPosition.xyz-vPosition);
+    vec3 eye = normalize(-vPosition);
+    vec3 ref = normalize(reflect(-lig,nor));
 
     // Output position of the vertex, in clip space : MVP * vPosition
     gl_Position = mvpMatrix * vec4(vPosition, 1);
@@ -66,8 +71,22 @@ void main()
     if(gouraudShading)
     {
         // TODO add there code for gouraud shading
-       
+       if(settings.ambientSwitch)
+       {
+        objectColor += material.ambient * light.lightColour*vColor;
+       }
+       if(settings.diffuseSwitch)
+       {
+        float diff = max(dot(-lig,nor),0.0);
+        objectColor += material.diffuse * diff * light.lightColour *vColor;
+       }
+       if(settings.specularSwitch)
+       {
+        float spec = max(dot(ref,eye), 0.0);
+        objectColor += material.specular * pow(spec,material.shiny) * light.lightColour * vColor;
+       }
         // END TODO
     }
+    flat_color = vec4(vColor,1.0);
 }
 
