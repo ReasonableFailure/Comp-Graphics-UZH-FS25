@@ -5,22 +5,21 @@
  *      ...it emits the color in case you do gouraud shading
  */
 
-layout(std140) uniform settingsBlock{
-    bool wire;
+uniform settingsBlock{
     bool lightingSwitch;
     bool ambientSwitch;
     bool diffuseSwitch;
     bool specularSwitch;
 } settings;
 
-layout(std140) uniform materialBlock{
+uniform materialBlock{
     float ambient;
     float diffuse;
     float specular;
     float shiny;
 } material;
 
-layout(std140) uniform lightBlock{
+uniform lightBlock{
     vec4 lightPosition;
     vec4 lightColour;
 } light;
@@ -73,17 +72,17 @@ void main()
         // TODO add there code for gouraud shading
        if(settings.ambientSwitch)
        {
-        objectColor += material.ambient * light.lightColour*vColor;
+        objectColor += material.ambient * vec3(light.lightColour)*vColor;
        }
        if(settings.diffuseSwitch)
        {
         float diff = max(dot(-lig,nor),0.0);
-        objectColor += material.diffuse * diff * light.lightColour *vColor;
+        objectColor += material.diffuse * diff * vec3(light.lightColour) *vColor;
        }
        if(settings.specularSwitch)
        {
         float spec = max(dot(ref,eye), 0.0);
-        objectColor += material.specular * pow(spec,material.shiny) * light.lightColour * vColor;
+        objectColor += material.specular * pow(spec,material.shiny) * vec3(light.lightColour) * vColor;
        }
         // END TODO
     }

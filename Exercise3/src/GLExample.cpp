@@ -69,8 +69,7 @@ namespace cgCourse
 
 	bool GLExample::update()
 	{
-        if (stopAnimation)
-            return true;
+        if (stopAnimation) return true;
 
 		torusKnot->setRotation(glm::radians(10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 

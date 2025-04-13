@@ -11,29 +11,25 @@ in vec3 worldPos;
 /* TODO fill these structs with values from outside the shader similar
  *      to your matrix variables
  */
- layout(std140) uniform settingsBlock{
-    bool wire;
+uniform settingsBlock{
     bool lightingSwitch;
     bool ambientSwitch;
     bool diffuseSwitch;
     bool specularSwitch;
 } settings;
 
-layout(std140) uniform materialBlock{
+uniform materialBlock{
     float ambient;
     float diffuse;
     float specular;
     float shiny;
 } material;
 
-layout(std140) uniform lightBlock{
+uniform lightBlock{
     vec4 lightPosition;
     vec4 lightColour;
 } light;
 
-in vec3 objectColor;
-in vec3 normal;
-in vec3 worldPos;
 flat in vec4 flat_color;
 
 
@@ -57,17 +53,17 @@ void main()
         // TODO add there code for phong lighting
         if(settings.ambientSwitch)
         {
-            color += material.ambient * light.lightColour * objectColor;
+            color += material.ambient * vec3(light.lightColour) * objectColor;
         }
         if(settings.diffuseSwitch)
         {
             float diff = max(0.0,dot(normal,licht));
-            color += material.diffuse * diff * light.lightColour * objectColor;
+            color += material.diffuse * diff * vec3(light.lightColour) * objectColor;
         }
         if(settings.specularSwitch)
         {
             float spec = max(0.0, dot(r,betrachter));
-            color += material.specular * pow(spec,material.shiny) * objectColor * light.lightColour;
+            color += material.specular * pow(spec,material.shiny) * objectColor * vec3(light.lightColour);
         }
         // END TODO
     }

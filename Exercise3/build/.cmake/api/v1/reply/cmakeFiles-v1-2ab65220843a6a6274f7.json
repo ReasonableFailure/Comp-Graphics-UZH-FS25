@@ -1,0 +1,273 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.28.1/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeDependentOption.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.28.1/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/UnixPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Compiler/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/vcpkg-cmake-wrapper.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/SelectLibraryConfigurations.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/glew-config.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/glew-targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/glew-targets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/glew-targets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glew/CopyImportedTargetProperties.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glfw3/glfw3ConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glfw3/glfw3Config.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glfw3/glfw3Targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glfw3/glfw3Targets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glfw3/glfw3Targets-release.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindOpenGL.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/opt/st/stm32cubeclt_1.16.0/CMake/share/cmake-3.28/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glm/glmConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glm/glmConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glm/glmConfig-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/vcpkg/installed/x64-linux/share/glm/glmConfig-release.cmake"
+		},
+		{
+			"path" : "imgui/CMakeLists.txt"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise3/build",
+		"source" : "/home/faye/UZH/6Sem/Computer_Graphics/exercises_fs25/Exercise3"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
