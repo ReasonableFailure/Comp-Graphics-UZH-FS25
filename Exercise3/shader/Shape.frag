@@ -11,24 +11,15 @@ in vec3 worldPos;
 /* TODO fill these structs with values from outside the shader similar
  *      to your matrix variables
  */
-uniform settingsBlock{
-    bool lightingSwitch;
-    bool ambientSwitch;
-    bool diffuseSwitch;
-    bool specularSwitch;
-} settings;
 
-uniform materialBlock{
-    float ambient;
-    float diffuse;
-    float specular;
-    float shiny;
-} material;
+uniform float ambient;
+uniform float diffuse;
+uniform float specular;
+uniform float shiny;
 
-uniform lightBlock{
-    vec4 lightPosition;
-    vec4 lightColour;
-} light;
+uniform vec4 lightPosition;
+uniform vec4 lightColour;
+
 
 flat in vec4 flat_color;
 
@@ -45,26 +36,17 @@ void main()
     // Output color = color specified in the vertex shader,
     // interpolated between all 3 surrounding vertices
     color = objectColor;
-    vec3 licht = normalize(light.lightPosition.xyz-worldPos);
+    vec3 licht = normalize(lightPosition.xyz-worldPos);
     vec3 betrachter = normalize(-worldPos);
     vec3 r = normalize(reflect(-licht,normal));
     if(!gouraudShading)
     {
         // TODO add there code for phong lighting
-        if(settings.ambientSwitch)
-        {
-            color += material.ambient * vec3(light.lightColour) * objectColor;
-        }
-        if(settings.diffuseSwitch)
-        {
-            float diff = max(0.0,dot(normal,licht));
-            color += material.diffuse * diff * vec3(light.lightColour) * objectColor;
-        }
-        if(settings.specularSwitch)
-        {
-            float spec = max(0.0, dot(r,betrachter));
-            color += material.specular * pow(spec,material.shiny) * objectColor * vec3(light.lightColour);
-        }
+        color += ambient * vec3(lightColour) * objectColor;
+        float diff = max(0.0,dot(normal,licht));
+        color += diffuse * diff * vec3(lightColour) * objectColor;
+        float spec = max(0.0, dot(r,betrachter));
+        color += specular * pow(spec,shiny) * objectColor * vec3(lightColour);
         // END TODO
     }
 }

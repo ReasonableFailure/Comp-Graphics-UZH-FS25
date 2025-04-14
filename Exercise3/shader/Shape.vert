@@ -5,24 +5,13 @@
  *      ...it emits the color in case you do gouraud shading
  */
 
-uniform settingsBlock{
-    bool lightingSwitch;
-    bool ambientSwitch;
-    bool diffuseSwitch;
-    bool specularSwitch;
-} settings;
+uniform float ambient;
+uniform float diffuse;
+uniform float specular;
+uniform float shiny;
 
-uniform materialBlock{
-    float ambient;
-    float diffuse;
-    float specular;
-    float shiny;
-} material;
-
-uniform lightBlock{
-    vec4 lightPosition;
-    vec4 lightColour;
-} light;
+uniform vec4 lightPosition;
+uniform vec4 lightColour;
 
 // Input vertex data
 layout(location = 0) in vec3 vPosition;
@@ -50,7 +39,7 @@ void main()
 {
     normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
     vec3 nor = mat3(transpose(inverse(modelMatrix)))*normalize(vNormal);
-    vec3 lig = normalize(light.lightPosition.xyz-vPosition);
+    vec3 lig = normalize(lightPosition.xyz-vPosition);
     vec3 eye = normalize(-vPosition);
     vec3 ref = normalize(reflect(-lig,nor));
 
@@ -70,20 +59,11 @@ void main()
     if(gouraudShading)
     {
         // TODO add there code for gouraud shading
-       if(settings.ambientSwitch)
-       {
-        objectColor += material.ambient * vec3(light.lightColour)*vColor;
-       }
-       if(settings.diffuseSwitch)
-       {
-        float diff = max(dot(-lig,nor),0.0);
-        objectColor += material.diffuse * diff * vec3(light.lightColour) *vColor;
-       }
-       if(settings.specularSwitch)
-       {
-        float spec = max(dot(ref,eye), 0.0);
-        objectColor += material.specular * pow(spec,material.shiny) * vec3(light.lightColour) * vColor;
-       }
+        color += ambient * vec3(lightColour) * objectColor;
+        float diff = max(0.0,dot(normal,licht));
+        color += diffuse * diff * vec3(lightColour) * objectColor;
+        float spec = max(0.0, dot(r,betrachter));
+        color += specular * pow(spec,shiny) * objectColor * vec3(lightColour);
         // END TODO
     }
     flat_color = vec4(vColor,1.0);
