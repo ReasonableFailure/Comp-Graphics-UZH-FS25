@@ -35,6 +35,31 @@ namespace cgCourse
 		bool render() override;
 		bool end() override;
 
+		struct SettingsStruct
+        {
+            GLuint lightingSwitch;
+            GLuint ambientSwitch;
+            GLuint diffuseSwitch;
+            GLuint specularSwitch;
+        };
+		SettingsStruct settings;
+        
+        struct MaterialStruct
+        {
+            float ambient;
+            float diffuse;
+            float specular;
+            float shiny;
+        };
+		MaterialStruct material;
+        struct LightStruct 
+		{
+			glm::vec4 lightPosition;
+			glm::vec4 lightColour;
+		};
+		LightStruct light;
+		
+
     protected:
         void imgui() override;
 
