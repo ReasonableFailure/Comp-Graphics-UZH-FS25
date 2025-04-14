@@ -42,6 +42,7 @@ namespace cgCourse
             GLuint diffuseSwitch;
             GLuint specularSwitch;
         };
+		
 		SettingsStruct settings;
         
         struct MaterialStruct

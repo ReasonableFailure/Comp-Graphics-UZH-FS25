@@ -64,7 +64,7 @@ namespace cgCourse
 		if(!normalsTorusKnot->createVertexArray(0, 1, 2))
 			return false;
         
-        SettingsStruct settings = {1,0,0,0};
+        SettingsStruct settings = {1,1,1,1};
         MaterialStruct material = {0.3f,0.8f,0.6f,10.0f};
         LightStruct light;
         light.lightPosition = glm::vec4(0.0f,0.0f,0.0f,1.0f);
@@ -137,15 +137,15 @@ namespace cgCourse
 	{
         GLuint settingsBO, materialBO, lightBO, settingsLoc, materialsLoc,lightLoc;
         
-        program->bind();
+        GLuint shaderProgram = program->bind();
         // load settings buffer
 		glGenBuffers(1, &settingsBO);
         glBindBuffer(GL_UNIFORM_BUFFER, settingsBO);
         glBufferData(GL_UNIFORM_BUFFER, sizeof(settings), &settings, GL_DYNAMIC_DRAW);
         
         // the next 2 lines connect the uniform name and bufferobject to the same index 0
-        settingsLoc = program->getUniformLocation("settingsBlock");
-        glUniformBlockBinding(program, settingsLoc, 0);
+        settingsLoc = glGetUniformBlockIndex(shaderProgram,"settingsBlock");
+        glUniformBlockBinding(shaderProgram, settingsLoc, 0);
         glBindBufferBase(GL_UNIFORM_BUFFER, 0, settingsBO);
 
         // setup material buffer
@@ -154,8 +154,8 @@ namespace cgCourse
         glBufferData(GL_UNIFORM_BUFFER, sizeof(material), &material, GL_DYNAMIC_DRAW);
 
         // the next 2 lines connect the uniform name and bufferobject to the same index 1
-        materialsLoc = program->getUniformLocation("materialBlock");
-        glUniformBlockBinding(program, materialsLoc, 1);
+        materialsLoc = glGetUniformBlockIndex(shaderProgram,"materialBlock");
+        glUniformBlockBinding(shaderProgram, materialsLoc, 1);
         glBindBufferBase(GL_UNIFORM_BUFFER, 1, materialBO);
 
         // setup uniform light data buffers
@@ -164,8 +164,8 @@ namespace cgCourse
         glBufferData(GL_UNIFORM_BUFFER, sizeof(light), &light, GL_DYNAMIC_DRAW);
 
         // the next 2 lines connect the uniform name and bufferobject to the same index 2
-        lightLoc = program->getUniformLocation("lightBlock");
-        glUniformBlockBinding(program, lightLoc, 2);
+        lightLoc = glGetUniformBlockIndex(shaderProgram,"lightBlock");
+        glUniformBlockBinding(shaderProgram, lightLoc, 2);
         glBindBufferBase(GL_UNIFORM_BUFFER, 2, lightBO);
 
         program->unbind();

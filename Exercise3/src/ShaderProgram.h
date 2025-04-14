@@ -12,7 +12,7 @@ namespace cgCourse
 		ShaderProgram(std::string _name);
 
 		void deleteShaderProgramFromGPU();
-		void bind() const;
+		GLuint bind() const;
 		void unbind() const;
 
 		GLuint getUniformLocation(const std::string & _uniformName);
