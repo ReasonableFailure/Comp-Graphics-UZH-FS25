@@ -33,33 +33,7 @@ namespace cgCourse
 		bool init() override;
 		bool update() override;
 		bool render() override;
-		bool end() override;
-
-		struct SettingsStruct
-        {
-            GLuint lightingSwitch;
-            GLuint ambientSwitch;
-            GLuint diffuseSwitch;
-            GLuint specularSwitch;
-        };
-		
-		SettingsStruct settings;
-        
-        struct MaterialStruct
-        {
-            float ambient;
-            float diffuse;
-            float specular;
-            float shiny;
-        };
-		MaterialStruct material;
-        struct LightStruct 
-		{
-			glm::vec4 lightPosition;
-			glm::vec4 lightColour;
-		};
-		LightStruct light;
-		
+		bool end() override;		
 
     protected:
         void imgui() override;
@@ -70,6 +44,13 @@ namespace cgCourse
         void renderCube();
         void renderTorus();
         void renderTorusKnot();
+
+		// const float material[4] = {0.3f,0.0f,0.0f,10.0f};
+		// const float material[4] = {0.0f,0.8f,0.0f,10.0f};
+		// const float material[4] = {0.0f,0.0f,0.6f,10.0f};
+		const float material[4] = {0.3f,0.8f,0.6f,10.0f};
+		const glm::vec4 lightColour = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		const glm::vec4 lightPosition = glm::vec4(0.0f,0.0f,0.0f,1.0f);
 
 		std::shared_ptr<ShaderProgram> programForLightBox;
 		std::shared_ptr<ShaderProgram> programForShape;

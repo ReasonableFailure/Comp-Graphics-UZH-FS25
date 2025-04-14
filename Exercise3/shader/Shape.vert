@@ -37,10 +37,11 @@ uniform bool gouraudShading;
 
 void main()
 {
+    worldPos = vec3(modelMatrix * vec4(vPosition, 1));
     normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
     vec3 nor = mat3(transpose(inverse(modelMatrix)))*normalize(vNormal);
-    vec3 lig = normalize(lightPosition.xyz-vPosition);
-    vec3 eye = normalize(-vPosition);
+    vec3 lig = normalize(lightPosition.xyz-worldPos);
+    vec3 eye = normalize(-worldPos);
     vec3 ref = normalize(reflect(-lig,nor));
 
     // Output position of the vertex, in clip space : MVP * vPosition
@@ -53,17 +54,14 @@ void main()
 
     // ... uncomment this for color according to normals
     // objectColor = vNormal;
-
-    worldPos = vec3(modelMatrix * vec4(vPosition, 1));
-
     if(gouraudShading)
     {
         // TODO add there code for gouraud shading
-        color += ambient * vec3(lightColour) * objectColor;
-        float diff = max(0.0,dot(normal,licht));
-        color += diffuse * diff * vec3(lightColour) * objectColor;
-        float spec = max(0.0, dot(r,betrachter));
-        color += specular * pow(spec,shiny) * objectColor * vec3(lightColour);
+        objectColor = ambient * vec3(lightColour) * objectColor;
+        float diff = max(0.0,dot(nor,lig));
+        objectColor += diffuse * diff * vec3(lightColour) * objectColor;
+        float spec = max(0.0, dot(ref,eye));
+        objectColor += specular * pow(spec,shiny) * objectColor * vec3(lightColour);
         // END TODO
     }
     flat_color = vec4(vColor,1.0);

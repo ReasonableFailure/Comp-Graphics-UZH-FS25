@@ -63,14 +63,6 @@ namespace cgCourse
                                                    torusKnot->normals);
 		if(!normalsTorusKnot->createVertexArray(0, 1, 2))
 			return false;
-        
-        SettingsStruct settings = {1,1,1,1};
-        MaterialStruct material = {0.3f,0.8f,0.6f,10.0f};
-        LightStruct light;
-        light.lightPosition = glm::vec4(0.0f,0.0f,0.0f,1.0f);
-        light.lightColour = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-
-
 		return true;
 	}
 
@@ -135,8 +127,20 @@ namespace cgCourse
 	 */
 	void GLExample::addLightVariables(const std::shared_ptr<ShaderProgram> & program)
 	{
+        /*uniform float ambient;
+        uniform float diffuse;
+        uniform float specular;
+        uniform float shiny;
+
+        uniform vec4 lightPosition;
+        uniform vec4 lightColour;*/
         program->bind();
-        
+        glUniform1f(program->getUniformLocation("ambient"),material[0]);
+        glUniform1f(program->getUniformLocation("diffuse"),material[1]);
+        glUniform1f(program->getUniformLocation("specular"),material[2]);
+        glUniform1f(program->getUniformLocation("shiny"),material[3]);
+        glUniform3fv(program->getUniformLocation("lightPosition"),sizeof(float)*4,&lightPosition[0]);
+        glUniform3fv(program->getUniformLocation("lightColour"),sizeof(float)*4,&lightColour[0]);
         program->unbind();
     }
     // END TODO

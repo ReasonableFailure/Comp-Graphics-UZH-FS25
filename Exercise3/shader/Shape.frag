@@ -36,16 +36,16 @@ void main()
     // Output color = color specified in the vertex shader,
     // interpolated between all 3 surrounding vertices
     color = objectColor;
-    vec3 licht = normalize(lightPosition.xyz-worldPos);
-    vec3 betrachter = normalize(-worldPos);
-    vec3 r = normalize(reflect(-licht,normal));
+    vec3 lig = normalize(lightPosition.xyz-worldPos);
+    vec3 eye = normalize(-worldPos);
+    vec3 ref = normalize(reflect(-lig,normal));
     if(!gouraudShading)
     {
         // TODO add there code for phong lighting
         color += ambient * vec3(lightColour) * objectColor;
-        float diff = max(0.0,dot(normal,licht));
+        float diff = max(0.0,dot(normal,lig));
         color += diffuse * diff * vec3(lightColour) * objectColor;
-        float spec = max(0.0, dot(r,betrachter));
+        float spec = max(0.0, dot(ref,eye));
         color += specular * pow(spec,shiny) * objectColor * vec3(lightColour);
         // END TODO
     }
