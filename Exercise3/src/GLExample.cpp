@@ -64,11 +64,12 @@ namespace cgCourse
 		if(!normalsTorusKnot->createVertexArray(0, 1, 2))
 			return false;
         
-        SettingsStruct settings = {1,1,1,1};
-        MaterialStruct material = {0.3f,0.8f,0.6f,10.0f};
-        LightStruct light;
+        settings = {1,1,1,1}; //light, ambient, diffuse, specular
+        material = {0.3f,0.8f,0.6f,10.0f};
         light.lightPosition = glm::vec4(0.0f,0.0f,0.0f,1.0f);
         light.lightColour = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+        light.lightDirection = glm::vec4(-10.0,-10.0,10.0,1.0);
+        light.cutOff = glm::cos(glm::radians(30.0f));
 
 
 		return true;
@@ -102,7 +103,15 @@ namespace cgCourse
         // overrides the animated light position with a fixed one (e.g., (3.0, 1.5, -1.0))
         // You can add a checkbox to the UI (ImGui) and use it to control this behavior.
 
-		lightbox->setPosition(glm::vec3(animation, 1.5, -0.0));
+		if(!bonusTask)
+        {
+            lightbox->setPosition(glm::vec3(animation, 1.5, -0.0));
+            light.lightPosition = glm::vec4(lightbox->getPosition(),1.0);
+        } else
+        {
+            lightbox->setPosition(glm::vec3(2.0,animation,-0.0));
+            light.lightPosition = glm::vec4(lightbox->getPosition(),1.0);            
+        }
 
 		return true;
 	}
@@ -155,6 +164,7 @@ namespace cgCourse
 
         // the next 2 lines connect the uniform name and bufferobject to the same index 1
         materialsLoc = glGetUniformBlockIndex(shaderProgram,"materialBlock");
+        // std::cout << "material " << materialsLoc << "\n";
         glUniformBlockBinding(shaderProgram, materialsLoc, 1);
         glBindBufferBase(GL_UNIFORM_BUFFER, 1, materialBO);
 
@@ -165,9 +175,9 @@ namespace cgCourse
 
         // the next 2 lines connect the uniform name and bufferobject to the same index 2
         lightLoc = glGetUniformBlockIndex(shaderProgram,"lightBlock");
+        // std::cout << "light " << lightLoc << "\n";
         glUniformBlockBinding(shaderProgram, lightLoc, 2);
         glBindBufferBase(GL_UNIFORM_BUFFER, 2, lightBO);
-
         program->unbind();
     }
     // END TODO
@@ -178,6 +188,7 @@ namespace cgCourse
         glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
         glUniformMatrix4fv(programForShape->getUniformLocation("modelMatrix"), 1, GL_FALSE, &cube->getModelMatrix()[0][0]);
         glUniform1i(programForShape->getUniformLocation("gouraudShading"), renderMode == GOURAUD_SHADING);
+        glUniform1i(programForShape->getUniformLocation("bonusTask"),bonusTask);
         cube->draw();
         programForShape->unbind();
     }
@@ -188,6 +199,7 @@ namespace cgCourse
         glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
         glUniformMatrix4fv(programForShape->getUniformLocation("modelMatrix"), 1, GL_FALSE, &torus->getModelMatrix()[0][0]);
         glUniform1i(programForShape->getUniformLocation("gouraudShading"), renderMode == GOURAUD_SHADING);
+        glUniform1i(programForShape->getUniformLocation("bonusTask"),bonusTask);
         torus->draw();
         programForShape->unbind();
 
@@ -206,6 +218,7 @@ namespace cgCourse
         glUniformMatrix4fv(programForShape->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
         glUniformMatrix4fv(programForShape->getUniformLocation("modelMatrix"), 1, GL_FALSE, &torusKnot->getModelMatrix()[0][0]);
         glUniform1i(programForShape->getUniformLocation("gouraudShading"), renderMode == GOURAUD_SHADING);
+        glUniform1i(programForShape->getUniformLocation("bonusTask"),bonusTask);
         torusKnot->draw();
         programForShape->unbind();
 
@@ -224,6 +237,7 @@ namespace cgCourse
 		mvpMatrix = cam.getViewProjectionMatrix() * lightbox->getModelMatrix();
 		glUniform3fv(programForLightBox->getUniformLocation("objectColor"), 1, &lightColor[0]);
 		glUniformMatrix4fv(programForLightBox->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
+        glUniform1i(programForLightBox->getUniformLocation("bonusTask"),bonusTask);
 		lightbox->draw();
 		programForLightBox->unbind();
 	}

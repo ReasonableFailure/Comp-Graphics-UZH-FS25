@@ -37,10 +37,10 @@ namespace cgCourse
 
 		struct SettingsStruct
         {
-            GLuint lightingSwitch;
-            GLuint ambientSwitch;
-            GLuint diffuseSwitch;
-            GLuint specularSwitch;
+            int lightingSwitch;
+            int ambientSwitch;
+            int diffuseSwitch;
+            int specularSwitch;
         };
 		
 		SettingsStruct settings;
@@ -52,11 +52,15 @@ namespace cgCourse
             float specular;
             float shiny;
         };
+
 		MaterialStruct material;
+
         struct LightStruct 
 		{
 			glm::vec4 lightPosition;
 			glm::vec4 lightColour;
+			glm::vec4 lightDirection;
+			float cutOff;
 		};
 		LightStruct light;
 		

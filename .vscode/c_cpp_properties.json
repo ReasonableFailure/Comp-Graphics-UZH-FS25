@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "/usr/include/**",
                 "/usr/local/include/**",
-                "/usr/lib/**"
+                "/usr/lib/**",
+                "/home/faye/UZH/6Sem/Computer_Graphics/CImg-3.5.4_pre05022511"
             ],
             "defines": [],
             "cStandard": "c17",

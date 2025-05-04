@@ -5,23 +5,25 @@
  *      ...it emits the color in case you do gouraud shading
  */
 
-uniform settingsBlock{
-    bool lightingSwitch;
-    bool ambientSwitch;
-    bool diffuseSwitch;
-    bool specularSwitch;
+layout(std140) uniform settingsBlock{
+    int lightingSwitch;
+    int ambientSwitch;
+    int diffuseSwitch;
+    int specularSwitch;
 } settings;
 
-uniform materialBlock{
+layout(std140) uniform materialBlock{
     float ambient;
     float diffuse;
     float specular;
     float shiny;
 } material;
 
-uniform lightBlock{
+layout(std140) uniform lightBlock{
     vec4 lightPosition;
     vec4 lightColour;
+    vec4 lightDirection;
+    float cutOff;
 } light;
 
 // Input vertex data
@@ -41,6 +43,7 @@ uniform mat4 modelMatrix;
 uniform mat4 mvpMatrix;
 
 uniform bool gouraudShading;
+uniform bool bonusTask;
 
 // TODO Additional variables
 
@@ -48,11 +51,13 @@ uniform bool gouraudShading;
 
 void main()
 {
+    worldPos = vec3(modelMatrix * vec4(vPosition, 1));
     normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
     vec3 nor = mat3(transpose(inverse(modelMatrix)))*normalize(vNormal);
-    vec3 lig = normalize(light.lightPosition.xyz-vPosition);
-    vec3 eye = normalize(-vPosition);
+    vec3 lig = normalize(vec3(light.lightPosition - vec4(worldPos,1.0)));
+    vec3 eye = normalize(-worldPos);
     vec3 ref = normalize(reflect(-lig,nor));
+    float theta = dot(vec4(lig,1.0), normalize(-light.lightDirection));
 
     // Output position of the vertex, in clip space : MVP * vPosition
     gl_Position = mvpMatrix * vec4(vPosition, 1);
@@ -65,27 +70,47 @@ void main()
     // ... uncomment this for color according to normals
     // objectColor = vNormal;
 
-    worldPos = vec3(modelMatrix * vec4(vPosition, 1));
-
-    if(gouraudShading)
-    {
-        // TODO add there code for gouraud shading
-       if(settings.ambientSwitch)
-       {
-        objectColor += material.ambient * vec3(light.lightColour)*vColor;
-       }
-       if(settings.diffuseSwitch)
-       {
-        float diff = max(dot(-lig,nor),0.0);
-        objectColor += material.diffuse * diff * vec3(light.lightColour) *vColor;
-       }
-       if(settings.specularSwitch)
-       {
-        float spec = max(dot(ref,eye), 0.0);
-        objectColor += material.specular * pow(spec,material.shiny) * vec3(light.lightColour) * vColor;
-       }
-        // END TODO
+    if(bonusTask){
+        if(theta > light.cutOff){
+            if(gouraudShading){
+                objectColor = vec3(0.0,0.0,0.0);
+                if(settings.ambientSwitch!=0)
+                {
+                    objectColor += material.ambient * vec3(light.lightColour) * vColor;
+                }
+                if(settings.diffuseSwitch!=0)
+                {
+                    float diff = max(dot(lig,nor), 0.0);
+                    objectColor += material.diffuse * diff * vec3(light.lightColour) * vColor;
+                }
+                if(settings.specularSwitch!=0)
+                {
+                    float spec = max(dot(ref,eye), 0.0);
+                    objectColor += material.specular * pow(spec,material.shiny) * vec3(light.lightColour) * vColor;
+                }
+            }
+        } else {
+            objectColor = material.ambient * vec3(light.lightColour) * vColor;
+        }
+    } else {
+        if(gouraudShading){
+            objectColor = vec3(0.0,0.0,0.0);
+            if(settings.ambientSwitch!=0)
+            {
+                objectColor += material.ambient * vec3(light.lightColour) * vColor;
+            }
+            if(settings.diffuseSwitch!=0)
+            {
+                float diff = max(dot(lig,nor), 0.0);
+                objectColor += material.diffuse * diff * vec3(light.lightColour) * vColor;
+            }
+            if(settings.specularSwitch!=0)
+            {
+                float spec = max(dot(ref,eye), 0.0);
+                objectColor += material.specular * pow(spec,material.shiny) * vec3(light.lightColour) * vColor;
+            }
+        }
     }
-    flat_color = vec4(vColor,1.0);
+    flat_color=vec4(1.0,0.0,0.0,1.0);
 }
 
