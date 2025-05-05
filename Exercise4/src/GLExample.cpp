@@ -69,12 +69,11 @@ namespace cgCourse
 		 *      texture for the cube. Don't forget to initialize the shared pointers existing
 		 *      already in this class for this purpose.
 		 */
-		// cubetex = std::make_shared<Texture>();
-		// cubetex->loadFromFile(std::string(RES_DIR) + "/container.png");
-		torustex = std::make_shared<Texture>(); //= std::move(cubetex);
+		cubetex = std::make_shared<Texture>();
+		cubetex->loadFromFile(std::string(RES_DIR) + "/container.png");
+		torustex = std::make_shared<Texture>();
 		torustex->loadFromFile(std::string(RES_DIR) + "/container.png");
-        // ...
-
+ 
         // TODO END
 		return true;
 	}
@@ -187,7 +186,10 @@ namespace cgCourse
 		 *       variable in the shader is meant to be which texture layer when
 		 *       used with glActiveTexture.
 		 */
-
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, programForTexturedShape->getUniformLocation("colourTexture"));
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D,programForTexturedShape->getUniformLocation("specTexture"));
         // End TODO
 
         mvpMatrix = cam.getViewProjectionMatrix() * cube->getModelMatrix();
@@ -215,7 +217,9 @@ namespace cgCourse
 		 *       variable in the shader is meant to be which texture layer when
 		 *       used with glActiveTexture.
 		 */
-
+		
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, programForTexturedShape->getUniformLocation("colourTexture"));
         // TODO END
 
 		mvpMatrix = cam.getViewProjectionMatrix() * torus->getModelMatrix();

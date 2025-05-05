@@ -17,7 +17,8 @@ flat in vec4 flat_colour;
 
 /* TODO declare texture samplers here */
 uniform sampler2D colourTexture;
-
+uniform sampler2D specTexture;
+uniform sampler2D normalTexture;
 // END TODO
 
 /* TODO fill these structs with values from outside the shader similar

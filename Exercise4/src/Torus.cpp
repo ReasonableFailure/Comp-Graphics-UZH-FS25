@@ -152,8 +152,6 @@ namespace cgCourse
         //       the same texture either by setting the texture coordinates between 0.0 and 1.0
         //       or by using one of the texture functions, e.g. with GL_REPEAT
 
-        //texCoords...
-		texCoords.resize(positions.size());
 		for (int j = 0; j < circleXZ.getVertices().size(); j++)
 		{
 			for (int i = 0; i < circleXY.getVertices().size(); i++)
@@ -161,8 +159,7 @@ namespace cgCourse
 				float phi = std::fmod(circleXZ.getAngles()[j],(M_PI/2)); //wrap around 4 times. major axis
 				float theta = circleXY.getAngles()[i]; //minor axis
 				texCoords.push_back(glm::vec2(float((2*phi)/M_PI), float(theta/(2*M_PI))));
-				// std::cout<<"phi "<<phi<<std::endl;
-				// std::cout<<"theta "<<theta<<std::endl;
+				// std::cout << "(" << (2*phi)/M_PI << ", " << theta/(2*M_PI) << ")\n";
 			}
 		}
 
